@@ -43,7 +43,7 @@ public class NorthwindContex : DbContext
         modelBuilder.Entity<Product>()
             .Property(x => x.CategoryId).HasColumnName("categoryid");
 
-        modelBuilder.Entity<Order>().ToTable("Order");
+        modelBuilder.Entity<Order>().ToTable("order");
         modelBuilder.Entity<Order>()
             .Property(x => x.Id).HasColumnName("orderid");
         modelBuilder.Entity<Order>()
@@ -58,5 +58,16 @@ public class NorthwindContex : DbContext
             .Property(x => x.ShipName).HasColumnName("shipname");
         modelBuilder.Entity<Order>()
             .Property(x => x.ShipCity).HasColumnName("shipcity");
+
+
+        modelBuilder.Entity<OrderDetails>().ToTable("orderdetails");
+        modelBuilder.Entity<OrderDetails>()
+            .Property(x => x.Id).HasColumnName("orderdetailsid");
+        modelBuilder.Entity<OrderDetails>()
+            .Property(x => x.UnitPrice).HasColumnName("unitprice");
+        modelBuilder.Entity<OrderDetails>()
+            .Property(x => x.Quantity).HasColumnName("quantity");
+        modelBuilder.Entity<OrderDetails>()
+            .Property(x => x.Discount).HasColumnName("discount");
     }
 }
