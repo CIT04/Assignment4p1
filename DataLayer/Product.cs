@@ -1,4 +1,5 @@
-﻿namespace EF;
+﻿
+namespace DataLayer;
 
 public class Product
 {
