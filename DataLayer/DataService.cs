@@ -26,7 +26,6 @@ public class DataService
         if (category != null)
         {
             db.Categories.Remove(category);
-            db.Remove(category);
             return db.SaveChanges() > 0;
         }
         return false;
