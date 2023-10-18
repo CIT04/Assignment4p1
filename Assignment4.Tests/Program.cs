@@ -1,6 +1,4 @@
-﻿
-
-using DataLayer;
+﻿using DataLayer;
 using Microsoft.EntityFrameworkCore;
 
 var db = new NorthwindContex();
