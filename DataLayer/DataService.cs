@@ -2,10 +2,20 @@
 
 public class DataService
 {
-    public object GetCategories()
+    public IList<Category> GetCategories()
     {
-        throw new NotImplementedException();
+        var db = new NorthwindContex();
+        return db.Categories.ToList();
     }
+
+    public Category GetCategory(int categoryId)
+    {
+        var db = new NorthwindContex();
+        return db.Categories.FirstOrDefault(x => x.Id == categoryId);
+        //return db.Categories.Find(categoryId);
+    }
+
+
 }
 
 
