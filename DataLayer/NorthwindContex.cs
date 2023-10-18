@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DataLayer;
 
@@ -14,7 +15,7 @@ public class NorthwindContex : DbContext
     {
         optionsBuilder.EnableSensitiveDataLogging();
         optionsBuilder
-            .LogTo(Console.Out.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
+            .LogTo(Console.Out.WriteLine, LogLevel.Information);
         optionsBuilder.UseNpgsql("host=localhost;db=northwind;uid=postgres;pwd=admin");
     }
 
@@ -37,7 +38,7 @@ public class NorthwindContex : DbContext
         modelBuilder.Entity<Product>()
             .Property(x => x.UnitPrice).HasColumnName("unitprice");
         modelBuilder.Entity<Product>()
-            .Property(x => x.QuantityPerUnit).HasColumnName("quantityperunit"); 
+            .Property(x => x.QuantityPerUnit).HasColumnName("quantityperunit");
         modelBuilder.Entity<Product>()
             .Property(x => x.UnitsInStock).HasColumnName("unitsinstock");
         modelBuilder.Entity<Product>()
@@ -69,6 +70,5 @@ public class NorthwindContex : DbContext
             .Property(x => x.Quantity).HasColumnName("quantity");
         modelBuilder.Entity<OrderDetails>()
             .Property(x => x.Discount).HasColumnName("discount");
-
     }
 }

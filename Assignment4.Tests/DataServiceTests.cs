@@ -1,4 +1,5 @@
 using DataLayer;
+
 namespace Assignment4.Tests;
 
 public class DataServiceTests
@@ -12,15 +13,15 @@ public class DataServiceTests
         Assert.Null(category.Name);
         Assert.Null(category.Description);
     }
-    
-    //[Fact]
-    //public void GetAllCategories_NoArgument_ReturnsAllCategories()
-    //{
-    //    var service = new DataService();
-    //    var categories = service.GetCategories();
-    //    Assert.Equal(8, categories.Count);
-    //    Assert.Equal("Beverages", categories.First().Name);
-    //}
+
+    [Fact]
+    public void GetAllCategories_NoArgument_ReturnsAllCategories()
+    {
+        var service = new DataService();
+        var categories = service.GetCategories();
+        Assert.Equal(8, categories.Count);
+        Assert.Equal("Beverages", categories.First().Name);
+    }
 
     //[Fact]
     //public void GetCategory_ValidId_ReturnsCategoryObject()
@@ -88,7 +89,7 @@ public class DataServiceTests
     //    Assert.False(result);
     //}
 
-    
+
     /* products */
 
     //[Fact]
@@ -201,5 +202,4 @@ public class DataServiceTests
     //    Assert.Equal(14, orderDetails.First().UnitPrice);
     //    Assert.Equal(12, orderDetails.First().Quantity);
     //}
-
 }
