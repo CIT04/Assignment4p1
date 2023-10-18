@@ -1,14 +1,18 @@
 ﻿namespace EF;
 
-public class Product
+public class Order
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public int CategoryId { get; set; }
-    public Category Category { get; set; }
+    public String OrderDate { get; set; }
+    public String RequiredDate { get; set; }
+    public String ShippedDate { get; set; }
+    public int Freight { get; set; }
+    public String ShipName { get; set; }
+    public String ShipCity { get; set; }
+
 
     public override string ToString()
     {
-        return $"{Id}, {Name}, {Category}";
+        return $"{Id}, {OrderDate}, {RequiredDate},{ShippedDate},{Freight},{ShipName}, {ShipCity}";
     }
 }
