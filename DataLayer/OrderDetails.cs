@@ -1,6 +1,6 @@
 ﻿namespace EF;
 
-public class Product
+public class OrderDetails
 {
     public int Id { get; set; }
     public string Name { get; set; }
