@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace EF;
+namespace DataLayer;
 
 public class NorthwindContex : DbContext
 {

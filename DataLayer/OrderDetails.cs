@@ -1,4 +1,4 @@
-﻿namespace EF;
+﻿namespace DataLayer;
 
 public class OrderDetails
 {
@@ -13,6 +13,6 @@ public class OrderDetails
 
     public override string ToString()
     {
-        return $"{Id}, {Name}, {Order}";
+        return $"{Id}, {UnitPrice}, {Order}";
     }
 }
