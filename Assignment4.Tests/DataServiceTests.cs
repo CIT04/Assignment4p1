@@ -81,27 +81,27 @@ public class DataServiceTests
         service.DeleteCategory(category.Id);
     }
 
-    //[Fact]
-    //public void UpdateCategory_InvalidID_ReturnsFalse()
-    //{
-    //    var service = new DataService();
-    //    var result = service.UpdateCategory(-1, "UpdatedName", "UpdatedDescription");
-    //    Assert.False(result);
-    //}
+    [Fact]
+    public void UpdateCategory_InvalidID_ReturnsFalse()
+    {
+        var service = new DataService();
+        var result = service.UpdateCategory(-1, "UpdatedName", "UpdatedDescription");
+        Assert.False(result);
+    }
 
 
     /* products */
 
-    //[Fact]
-    //public void Product_Object_HasIdNameUnitPriceQuantityPerUnitAndUnitsInStock()
-    //{
-    //    var product = new Product();
-    //    Assert.Equal(0, product.Id);
-    //    Assert.Null(product.Name);
-    //    Assert.Equal(0.0, product.UnitPrice);
-    //    Assert.Null(product.QuantityPerUnit);
-    //    Assert.Equal(0, product.UnitsInStock);
-    //}
+    [Fact]
+    public void Product_Object_HasIdNameUnitPriceQuantityPerUnitAndUnitsInStock()
+    {
+        var product = new Product();
+        Assert.Equal(0, product.Id);
+        Assert.Null(product.Name);
+        Assert.Equal(0.0, product.UnitPrice);
+        Assert.Null(product.QuantityPerUnit);
+        Assert.Equal(0, product.UnitsInStock);
+    }
 
     //[Fact]
     //public void GetProduct_ValidId_ReturnsProductWithCategory()
@@ -135,17 +135,17 @@ public class DataServiceTests
     //}
 
     ///* orders */
-    //[Fact]
-    //public void Order_Object_HasIdDatesAndOrderDetails()
-    //{
-    //    var order = new Order();
-    //    Assert.Equal(0, order.Id);
-    //    Assert.Equal(new DateTime(), order.Date);
-    //    Assert.Equal(new DateTime(), order.Required);
-    //    Assert.Null(order.OrderDetails);
-    //    Assert.Null(order.ShipName);
-    //    Assert.Null(order.ShipCity);
-    //}
+    [Fact]
+    public void Order_Object_HasIdDatesAndOrderDetails()
+    {
+        var order = new Order();
+        Assert.Equal(0, order.Id);
+        Assert.Equal(new DateTime(), order.Date);
+        Assert.Equal(new DateTime(), order.Required);
+        Assert.Null(order.OrderDetails);
+        Assert.Null(order.ShipName);
+        Assert.Null(order.ShipCity);
+    }
 
     //[Fact]
     //public void GetOrder_ValidId_ReturnsCompleteOrder()
