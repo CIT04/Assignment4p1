@@ -6,13 +6,16 @@ public class NorthwindContex : DbContext
 {
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Order> Order { get; set; }
+    public DbSet<OrderDetails> OrderDetails { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.EnableSensitiveDataLogging();
         optionsBuilder
             .LogTo(Console.Out.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
-        optionsBuilder.UseNpgsql("host=localhost;db=northwind;uid=bulskov;pwd=henrik");
+        optionsBuilder.UseNpgsql("host=localhost;db=northwind;uid=postgres;pwd=admin");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
