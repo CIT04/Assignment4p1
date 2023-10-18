@@ -10,6 +10,7 @@ public class Order
     public String ShipName { get; set; }
     public String ShipCity { get; set; }
 
+    public ICollection<OrderDetails> OrderDetails { get; set; }  
 
     public override string ToString()
     {
