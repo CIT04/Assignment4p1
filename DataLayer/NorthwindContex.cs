@@ -69,5 +69,6 @@ public class NorthwindContex : DbContext
             .Property(x => x.Quantity).HasColumnName("quantity");
         modelBuilder.Entity<OrderDetails>()
             .Property(x => x.Discount).HasColumnName("discount");
+
     }
 }
