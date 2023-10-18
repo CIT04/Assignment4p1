@@ -2,10 +2,20 @@
 
 public class DataService
 {
-    public object GetCategories()
+    public IList<Category> GetCategories()
     {
         var db = new NorthwindContex();
-        var categories = new List<Category>();
-        foreach (var entity in db.Categories) categories.Add(entity);
+        return db.Categories.ToList();
     }
+
+    public Category GetCategory(int categoryId)
+    {
+        var db = new NorthwindContex();
+        return db.Categories.FirstOrDefault(x => x.Id == categoryId);
+        //return db.Categories.Find(categoryId);
+    }
+
+
 }
+
+
