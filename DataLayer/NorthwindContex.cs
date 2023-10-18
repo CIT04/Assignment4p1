@@ -15,7 +15,7 @@ public class NorthwindContex : DbContext
         optionsBuilder.EnableSensitiveDataLogging();
         optionsBuilder
             .LogTo(Console.Out.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);
-        optionsBuilder.UseNpgsql("host=localhost;db=northwind;uid=postgres;pwd=admin");
+        optionsBuilder.UseNpgsql("host=localhost;db=northwind;uid=postgres;pwd=zzxx");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
