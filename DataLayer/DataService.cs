@@ -78,7 +78,7 @@ public class DataService
                            UnitPrice = p.UnitPrice,
                            QuantityPerUnit = p.QuantityPerUnit,
                            UnitsInStock = p.UnitsInStock,
-                           CategoryName = p.Category.Name, // Populate CategoryName from Category.Name
+                           //CategoryName = p.Category.Name, // Populate CategoryName from Category.Name
                            Category = p.Category
                        })
                        .FirstOrDefault(p => p.Id == productId);
@@ -100,36 +100,43 @@ public class DataService
                             UnitPrice = p.UnitPrice,
                             QuantityPerUnit = p.QuantityPerUnit,
                             UnitsInStock = p.UnitsInStock,
-                            CategoryName = p.Category.Name,
+                            //CategoryName = p.Category.Name,
                             Category = p.Category
                         })
                         .ToList();
 
         return products;
     }
-    public List<Product> GetProductByName(string nameSubString)
+    public List<GetProductNameTest> GetProductByName(string nameSubString)
     {
         var db = new NorthwindContex();
 
         var products = db.Products
                         .Include(p => p.Category)
                         .Where(p => p.Name.Contains(nameSubString))
-                        .Select(p => new Product
+                        .Select(p => new GetProductNameTest
                         {
-                            Id = p.Id,
-                            Name = p.Name,
-                            CategoryId = p.CategoryId,
-                            UnitPrice = p.UnitPrice,
-                            QuantityPerUnit = p.QuantityPerUnit,
-                            UnitsInStock = p.UnitsInStock,
+           
                             CategoryName = p.Category.Name,
                             ProductName = p.Name,
-                            Category = p.Category
+                            
                         })
                         .ToList();
 
         return products;
     }
+    public Orders GetOrder(int orderId)
+    {
+
+        var db = new NorthwindContex();
+        var order = db.Orders.FirstOrDefault(o => o.Id == orderId);
+        if (order == null)
+        {
+            throw new Exception($"Order with ID {orderId} not found.");
+        }
+        return order;
+    }
+
 }
 
 

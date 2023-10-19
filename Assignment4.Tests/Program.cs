@@ -7,7 +7,9 @@ var db = new NorthwindContex();
 //DeleteCategory(db);
 //UpdateCategory(db);
 
-foreach (var entity in db.Products.Include(x => x.Category)) Console.WriteLine(entity);
+foreach (var entity in db.OrderDetails.Include(x=>x.Product).ThenInclude(x=>x.Category).Include(x=>x.Order)) Console.WriteLine(entity);
+//foreach (var entity in db.Products) Console.WriteLine(entity);
+
 
 
 static void CreateCategory(NorthwindContex db)

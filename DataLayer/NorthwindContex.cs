@@ -6,7 +6,7 @@ public class NorthwindContex : DbContext
 {
     public DbSet<Category> Categories { get; set; }
     public DbSet<Product> Products { get; set; }
-    public DbSet<Order> Order { get; set; }
+    public DbSet<Orders> Orders { get; set; }
     public DbSet<OrderDetails> OrderDetails { get; set; }
 
 
@@ -43,26 +43,27 @@ public class NorthwindContex : DbContext
         modelBuilder.Entity<Product>()
             .Property(x => x.CategoryId).HasColumnName("categoryid");
 
-        modelBuilder.Entity<Order>().ToTable("order");
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<Orders>().ToTable("orders");
+        modelBuilder.Entity<Orders>()
             .Property(x => x.Id).HasColumnName("orderid");
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<Orders>()
             .Property(x => x.Date).HasColumnName("orderdate");
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<Orders>()
             .Property(x => x.Required).HasColumnName("requireddate");
-        modelBuilder.Entity<Order>()
-            .Property(x => x.ShippedDate).HasColumnName("shippeddate");
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<Orders>()
             .Property(x => x.Freight).HasColumnName("freight");
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<Orders>()
             .Property(x => x.ShipName).HasColumnName("shipname");
-        modelBuilder.Entity<Order>()
+        modelBuilder.Entity<Orders>()
             .Property(x => x.ShipCity).HasColumnName("shipcity");
 
 
         modelBuilder.Entity<OrderDetails>().ToTable("orderdetails");
+        modelBuilder.Entity<OrderDetails>().HasKey(x =>new { x.OrderId, x.ProductId });
         modelBuilder.Entity<OrderDetails>()
-            .Property(x => x.Id).HasColumnName("orderdetailsid");
+            .Property(x => x.OrderId).HasColumnName("orderid");
+        modelBuilder.Entity<OrderDetails>()
+            .Property(x => x.ProductId).HasColumnName("productid");
         modelBuilder.Entity<OrderDetails>()
             .Property(x => x.UnitPrice).HasColumnName("unitprice");
         modelBuilder.Entity<OrderDetails>()

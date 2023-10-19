@@ -7,10 +7,6 @@ public class Product
     public int CategoryId { get; set; }
     public int UnitPrice { get; set; }
     public string QuantityPerUnit { get; set; }
-
-    public string CategoryName { get; set; }
-
-    public string ProductName { get; set; }
     public int UnitsInStock { get; set; }
     public Category Category { get; set; }
 
