@@ -1,14 +1,14 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace DataLayer
-//{
-//    internal class ProductByCategory
-//    {
-
-//        public string  { get; set; }
-//    }
-//}
+namespace DataLayer
+{
+    public class ProductByCategory
+    {
+        public string Name { get; set; }
+        public string CategoryName { get; set; }
+    }
+}
