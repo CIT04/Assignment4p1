@@ -21,7 +21,6 @@ public class DataService
     {
         return DeleteCategory(category.Id);
     }
-
     public bool DeleteCategory(int categoryId)
     {
         var db = new NorthwindContex();
@@ -31,7 +30,6 @@ public class DataService
             db.Categories.Remove(category);
             return db.SaveChanges() > 0;
         }
-
         return false;
     }
 
@@ -64,28 +62,25 @@ public class DataService
             db.SaveChanges();
             return true;
         }
-
         return false;
     }
 
-    public Product GetProduct(int productId)
+    public ProductByCategory GetProduct(int productId)
     {
-        var db = new NorthwindContex();
-        var product = db.Products
-            .Include(p => p.Category) // Include the Category navigation property
-            .Select(p => new Product
-            {
-                Id = p.Id,
-                Name = p.Name,
-                CategoryId = p.CategoryId,
-                UnitPrice = p.UnitPrice,
-                QuantityPerUnit = p.QuantityPerUnit,
-                UnitsInStock = p.UnitsInStock,
-                //CategoryName = p.Category.Name, // Populate CategoryName from Category.Name
-                Category = p.Category
-            })
-            .FirstOrDefault(p => p.Id == productId);
-        return product;
+        using (var db = new NorthwindContex())
+        {
+            var product = db.Products
+                .Include(p => p.Category)
+                .Where(p => p.Id == productId)
+                .Select(p => new ProductByCategory
+                {
+                    Name = p.Name,
+                    CategoryName = p.Category.Name
+                })
+                .FirstOrDefault();
+
+            return product;
+        }
     }
 
     public List<Product> GetProductByCategory(int categoryId)
@@ -93,43 +88,41 @@ public class DataService
         var db = new NorthwindContex();
 
         var products = db.Products
-            .Include(p => p.Category)
-            .Where(p => p.CategoryId == categoryId)
-            .Select(p => new Product
-            {
-                Id = p.Id,
-                Name = p.Name,
-                CategoryId = p.CategoryId,
-                UnitPrice = p.UnitPrice,
-                QuantityPerUnit = p.QuantityPerUnit,
-                UnitsInStock = p.UnitsInStock,
-                //CategoryName = p.Category.Name,
-                Category = p.Category
-            })
-            .ToList();
+                        .Include(p => p.Category)
+                        .Where(p => p.CategoryId == categoryId)
+                        .Select(p => new Product
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            CategoryId = p.CategoryId,
+                            UnitPrice = p.UnitPrice,
+                            QuantityPerUnit = p.QuantityPerUnit,
+                            UnitsInStock = p.UnitsInStock,
+                            //CategoryName = p.Category.Name,
+                            Category = p.Category
+                        })
+                        .ToList();
 
         return products;
     }
-
     public List<GetProductNameTest> GetProductByName(string nameSubString)
     {
         var db = new NorthwindContex();
 
         var products = db.Products
-            .Include(p => p.Category)
-            .Where(p => p.Name.Contains(nameSubString))
-            .Select(p => new GetProductNameTest
-            {
-
-                CategoryName = p.Category.Name,
-                ProductName = p.Name,
-
-            })
-            .ToList();
+                        .Include(p => p.Category)
+                        .Where(p => p.Name.Contains(nameSubString))
+                        .Select(p => new GetProductNameTest
+                        {
+           
+                            CategoryName = p.Category.Name,
+                            ProductName = p.Name,
+                            
+                        })
+                        .ToList();
 
         return products;
     }
-
     public Orders GetOrder(int orderId)
     {
         using var db = new NorthwindContex();
@@ -146,64 +139,48 @@ public class DataService
 
         return order;
     }
-
-    public IList<Orders> GetOrders()
+    public IList<Orders>  GetOrders()
     {
         using var db = new NorthwindContex();
         return db.Orders.ToList();
     }
-
-    public List<OrderDetailsById> GetOrderDetailsByOrderId(int orderId)
+    public List<OrderDetails> GetOrderDetailsByOrderId(int orderId)
     {
         var db = new NorthwindContex();
         using (db)
         {
             var orderDetails = db.OrderDetails
                 .Include(od => od.Product)
-                .Where(od => od.OrderId == orderId)
-                .Select(od => new OrderDetailsById()
-                {
-                    ProductName = od.Product.Name,
-                    UnitPrice = od.UnitPrice,
-                    Quantity = od.Quantity,
-                    Product = od.Product
-                })
-                .ToList();
-
-            return orderDetails;
-        }
-    }
-
-
-
-    public List<OrderDateUnitPriceQuantity> GetOrderDetailsByProductId(int productId)
-    {
-        using (var db = new NorthwindContex())
-        {
-            var orderDetails = db.OrderDetails
-                .Include(od => od.Product)
                 .Include(od => od.Order)
-                .Where(od => od.ProductId == productId)
-                .OrderBy(od => od.OrderId)
-                .Select(od => new OrderDateUnitPriceQuantity
+                .Where(od => od.OrderId == orderId)
+                .Select(od => new OrderDetails
                 {
                     OrderId = od.OrderId,
+                    ProductId = od.ProductId,
                     UnitPrice = od.UnitPrice,
                     Quantity = od.Quantity,
-                    OrderDate = od.Order.Date,
-                    Order = od.Order
+                    Discount = od.Discount,
+                    Product = new Product
+                    {
+                        // Populate product properties from the related entity (if needed)
+                        Name = od.Product.Name,
+                        // Include other properties as necessary
+                    },
+                    Order = new Orders
+                    {
+                        // Populate order properties from the related entity (if needed)
+                    }
                 })
                 .ToList();
 
             return orderDetails;
         }
     }
+
+
 
 
 }
-
-
-
 
 
 /* */
