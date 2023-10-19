@@ -138,32 +138,46 @@ public List<GetProductNameTest> GetProductByName(string nameSubString)
         using var db = new NorthwindContex();
         return db.Orders.ToList();
     }
-    public List<OrderDetails> GetOrderDetailsByOrderId(int orderId)
+   
+    public List<OrderDetailsById> GetOrderDetailsByOrderId(int orderId)
     {
         var db = new NorthwindContex();
         using (db)
         {
             var orderDetails = db.OrderDetails
                 .Include(od => od.Product)
-                .Include(od => od.Order)
                 .Where(od => od.OrderId == orderId)
-                .Select(od => new OrderDetails
+                .Select(od => new OrderDetailsById()
                 {
-                    OrderId = od.OrderId,
-                    ProductId = od.ProductId,
+                    ProductName = od.Product.Name,
                     UnitPrice = od.UnitPrice,
                     Quantity = od.Quantity,
-                    Discount = od.Discount,
-                    Product = new Product
-                    {
-                        // Populate product properties from the related entity (if needed)
-                        Name = od.Product.Name,
-                        // Include other properties as necessary
-                    },
-                    Order = new Orders
-                    {
-                        // Populate order properties from the related entity (if needed)
-                    }
+                    Product = od.Product
+                })
+                .ToList();
+
+            return orderDetails;
+        }
+    }
+
+
+
+    public List<OrderDateUnitPriceQuantity> GetOrderDetailsByProductId(int productId)
+    {
+        using (var db = new NorthwindContex())
+        {
+            var orderDetails = db.OrderDetails
+                .Include(od => od.Product)
+                .Include(od => od.Order)
+                .Where(od => od.ProductId == productId)
+                .OrderBy(od => od.OrderId)
+                .Select(od => new OrderDateUnitPriceQuantity
+                {
+                    OrderId = od.OrderId,
+                    UnitPrice = od.UnitPrice,
+                    Quantity = od.Quantity,
+                    OrderDate = od.Order.Date,
+                    Order = od.Order
                 })
                 .ToList();
 
