@@ -112,16 +112,16 @@ public class DataServiceTests
         Assert.Equal("Beverages", product.CategoryName);
     }
 
-    //[Fact]
-    //public void GetProductsByCategory_ValidId_ReturnsProductWithCategory()
-    //{
-    //    var service = new DataService();
-    //    var products = service.GetProductByCategory(1);
-    //    Assert.Equal(12, products.Count);
-    //    Assert.Equal("Chai", products.First().Name);
-    //    Assert.Equal("Beverages", products.First().CategoryName);
-    //    Assert.Equal("Lakkalikööri", products.Last().Name);
-    //}
+    [Fact]
+    public void GetProductsByCategory_ValidId_ReturnsProductWithCategory()
+    {
+        var service = new DataService();
+        var products = service.GetProductByCategory(1);
+        Assert.Equal(12, products.Count);
+        Assert.Equal("Chai", products.First().Name);
+        Assert.Equal("Beverages", products.First().CategoryName);
+        Assert.Equal("Lakkalikööri", products.Last().Name);
+    }
 
     //[Fact]
     //public void GetProduct_NameSubString_ReturnsProductsThatMatchesTheSubString()

@@ -85,7 +85,31 @@ public class DataService
         return product;
     }
 
-    /* */
+    public List<Product> GetProductByCategory(int categoryId)
+    {
+        var db = new NorthwindContex();
+
+        var products = db.Products
+                        .Include(p => p.Category)
+                        .Where(p => p.CategoryId == categoryId)
+                        .Select(p => new Product
+                        {
+                            Id = p.Id,
+                            Name = p.Name,
+                            CategoryId = p.CategoryId,
+                            UnitPrice = p.UnitPrice,
+                            QuantityPerUnit = p.QuantityPerUnit,
+                            UnitsInStock = p.UnitsInStock,
+                            CategoryName = p.Category.Name,
+                            Category = p.Category
+                        })
+                        .ToList();
+
+        return products;
+    }
 }
+
+    /* */
+
 
 
