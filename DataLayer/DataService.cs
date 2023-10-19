@@ -127,15 +127,21 @@ public class DataService
     }
     public Orders GetOrder(int orderId)
     {
+        using var db = new NorthwindContex();
+        var order = db.Orders
+            .Include(o => o.OrderDetails)
+            .ThenInclude(od => od.Product)
+            .ThenInclude(p => p.Category)
+            .FirstOrDefault(o => o.Id == orderId);
 
-        var db = new NorthwindContex();
-        var order = db.Orders.FirstOrDefault(o => o.Id == orderId);
         if (order == null)
         {
             throw new Exception($"Order with ID {orderId} not found.");
         }
+
         return order;
     }
+
 
 }
 
