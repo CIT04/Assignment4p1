@@ -9,6 +9,8 @@ public class Product
     public string QuantityPerUnit { get; set; }
 
     public string CategoryName { get; set; }
+
+    public string ProductName { get; set; }
     public int UnitsInStock { get; set; }
     public Category Category { get; set; }
 

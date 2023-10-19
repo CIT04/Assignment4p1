@@ -8,7 +8,7 @@ public class Category
    
     public string Description { get; set; }
 
-    [Column("categoryname")]
+  //  [Column("categoryname")]
     public string Name { get; set; }
     public override string ToString()
     {

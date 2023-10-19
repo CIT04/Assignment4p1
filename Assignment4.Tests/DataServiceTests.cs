@@ -123,16 +123,16 @@ public class DataServiceTests
         Assert.Equal("Lakkalikööri", products.Last().Name);
     }
 
-    //[Fact]
-    //public void GetProduct_NameSubString_ReturnsProductsThatMatchesTheSubString()
-    //{
-    //    var service = new DataService();
-    //    var products = service.GetProductByName("em");
-    //    Assert.Equal(4, products.Count);
-    //    Assert.Equal("NuNuCa Nuß-Nougat-Creme", products.First().ProductName);
-    //    Assert.Equal("Confections", products.First().CategoryName);
-    //    Assert.Equal("Flotemysost", products.Last().ProductName);
-    //}
+    [Fact]
+    public void GetProduct_NameSubString_ReturnsProductsThatMatchesTheSubString()
+    {
+        var service = new DataService();
+        var products = service.GetProductByName("em");
+        Assert.Equal(4, products.Count);
+        Assert.Equal("NuNuCa Nuß-Nougat-Creme", products.First().ProductName);
+        Assert.Equal("Confections", products.First().CategoryName);
+        Assert.Equal("Flotemysost", products.Last().ProductName);
+    }
 
     ///* orders */
     [Fact]
