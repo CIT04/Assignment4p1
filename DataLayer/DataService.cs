@@ -1,4 +1,6 @@
-﻿namespace DataLayer;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace DataLayer;
 
 public class DataService
 {
@@ -61,6 +63,26 @@ public class DataService
             return true;
         }
         return false;
+    }
+
+    public Product GetProduct(int productId)
+    {
+        var db = new NorthwindContex();
+        var product = db.Products
+                       .Include(p => p.Category) // Include the Category navigation property
+                       .Select(p => new Product
+                       {
+                           Id = p.Id,
+                           Name = p.Name,
+                           CategoryId = p.CategoryId,
+                           UnitPrice = p.UnitPrice,
+                           QuantityPerUnit = p.QuantityPerUnit,
+                           UnitsInStock = p.UnitsInStock,
+                           CategoryName = p.Category.Name, // Populate CategoryName from Category.Name
+                           Category = p.Category
+                       })
+                       .FirstOrDefault(p => p.Id == productId);
+        return product;
     }
 
     /* */
