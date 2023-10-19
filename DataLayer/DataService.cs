@@ -141,6 +141,45 @@ public class DataService
 
         return order;
     }
+    public IList<Orders>  GetOrders()
+    {
+        using var db = new NorthwindContex();
+        return db.Orders.ToList();
+    }
+    public List<OrderDetails> GetOrderDetailsByOrderId(int orderId)
+    {
+        var db = new NorthwindContex();
+        using (db)
+        {
+            var orderDetails = db.OrderDetails
+                .Include(od => od.Product)
+                .Include(od => od.Order)
+                .Where(od => od.OrderId == orderId)
+                .Select(od => new OrderDetails
+                {
+                    OrderId = od.OrderId,
+                    ProductId = od.ProductId,
+                    UnitPrice = od.UnitPrice,
+                    Quantity = od.Quantity,
+                    Discount = od.Discount,
+                    Product = new Product
+                    {
+                        // Populate product properties from the related entity (if needed)
+                        Name = od.Product.Name,
+                        // Include other properties as necessary
+                    },
+                    Order = new Orders
+                    {
+                        // Populate order properties from the related entity (if needed)
+                    }
+                })
+                .ToList();
+
+            return orderDetails;
+        }
+    }
+
+
 
 
 }

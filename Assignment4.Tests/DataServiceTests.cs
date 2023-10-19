@@ -157,13 +157,13 @@ public class DataServiceTests
         Assert.Equal("Dairy Products", order.OrderDetails?.First().Product?.Category?.Name);
     }
 
-    //[Fact]
-    //public void GetOrders()
-    //{
-    //    var service = new DataService();
-    //    var orders = service.GetOrders();
-    //    Assert.Equal(830, orders.Count);
-    //}
+    [Fact]
+    public void GetOrders()
+    {
+        var service = new DataService();
+        var orders = service.GetOrders();
+        Assert.Equal(830, orders.Count);
+    }
 
 
     ///* order details */
@@ -180,16 +180,16 @@ public class DataServiceTests
         Assert.Equal(0.0, orderDetails.Discount);
     }
 
-    //[Fact]
-    //public void GetOrderDetailByOrderId_ValidId_ReturnsProductNameUnitPriceAndQuantity()
-    //{
-    //    var service = new DataService();
-    //    var orderDetails = service.GetOrderDetailsByOrderId(10248);
-    //    Assert.Equal(3, orderDetails.Count);
-    //    Assert.Equal("Queso Cabrales", orderDetails.First().Product?.Name);
-    //    Assert.Equal(14, orderDetails.First().UnitPrice);
-    //    Assert.Equal(12, orderDetails.First().Quantity);
-    //}
+    [Fact]
+    public void GetOrderDetailByOrderId_ValidId_ReturnsProductNameUnitPriceAndQuantity()
+    {
+        var service = new DataService();
+        var orderDetails = service.GetOrderDetailsByOrderId(10248);
+        Assert.Equal(3, orderDetails.Count);
+        Assert.Equal("Queso Cabrales", orderDetails.First().Product?.Name);
+        Assert.Equal(14, orderDetails.First().UnitPrice);
+        Assert.Equal(12, orderDetails.First().Quantity);
+    }
 
     //[Fact]
     //public void GetOrderDetailByProductId_ValidId_ReturnsOrderDateUnitPriceAndQuantity()
