@@ -83,29 +83,23 @@ public class DataService
         }
     }
 
-    public List<Product> GetProductByCategory(int categoryId)
+    public List<ProductByCategory> GetProductByCategory(int categoryId)
     {
-        var db = new NorthwindContex();
+        using (var db = new NorthwindContex())
+        {
+            var products = db.Products
+                .Where(p => p.CategoryId == categoryId)
+                .Select(p => new ProductByCategory
+                {
+                    Name = p.Name,
+                    CategoryName = p.Category.Name
+                })
+                .ToList();
 
-        var products = db.Products
-                        .Include(p => p.Category)
-                        .Where(p => p.CategoryId == categoryId)
-                        .Select(p => new Product
-                        {
-                            Id = p.Id,
-                            Name = p.Name,
-                            CategoryId = p.CategoryId,
-                            UnitPrice = p.UnitPrice,
-                            QuantityPerUnit = p.QuantityPerUnit,
-                            UnitsInStock = p.UnitsInStock,
-                            //CategoryName = p.Category.Name,
-                            Category = p.Category
-                        })
-                        .ToList();
-
-        return products;
+            return products;
+        }
     }
-    public List<GetProductNameTest> GetProductByName(string nameSubString)
+public List<GetProductNameTest> GetProductByName(string nameSubString)
     {
         var db = new NorthwindContex();
 
