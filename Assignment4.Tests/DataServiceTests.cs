@@ -1,5 +1,4 @@
-using DataLayer;
-
+ï»¿using DataLayer;
 namespace Assignment4.Tests;
 
 public class DataServiceTests
@@ -40,7 +39,7 @@ public class DataServiceTests
         Assert.Equal("Test", category.Name);
         Assert.Equal("CreateCategory_ValidData_CreteCategoryAndReturnsNewObject", category.Description);
 
-        //cleanup
+        // cleanup
         service.DeleteCategory(category.Id);
     }
 
@@ -120,7 +119,7 @@ public class DataServiceTests
         Assert.Equal(12, products.Count);
         Assert.Equal("Chai", products.First().Name);
         Assert.Equal("Beverages", products.First().CategoryName);
-        Assert.Equal("Lakkalikööri", products.Last().Name);
+        Assert.Equal("Lakkalikï¿½ï¿½ri", products.Last().Name);
     }
 
     [Fact]
@@ -129,16 +128,16 @@ public class DataServiceTests
         var service = new DataService();
         var products = service.GetProductByName("em");
         Assert.Equal(4, products.Count);
-        Assert.Equal("NuNuCa Nuß-Nougat-Creme", products.First().ProductName);
+        Assert.Equal("NuNuCa Nuï¿½-Nougat-Creme", products.First().ProductName);
         Assert.Equal("Confections", products.First().CategoryName);
         Assert.Equal("Flotemysost", products.Last().ProductName);
     }
 
-    ///* orders */
+    /* orders */
     [Fact]
     public void Order_Object_HasIdDatesAndOrderDetails()
     {
-        var order = new Orders();
+        var order = new Order();
         Assert.Equal(0, order.Id);
         Assert.Equal(new DateTime(), order.Date);
         Assert.Equal(new DateTime(), order.Required);
@@ -166,7 +165,7 @@ public class DataServiceTests
     }
 
 
-    ///* order details */
+    /* order details */
     [Fact]
     public void OrderDetails_Object_HasOrderProductUnitPriceQuantityAndDiscount()
     {
@@ -202,4 +201,5 @@ public class DataServiceTests
         Assert.Equal(14, orderDetails.First().UnitPrice);
         Assert.Equal(12, orderDetails.First().Quantity);
     }
+
 }
